@@ -11,9 +11,13 @@ public class Voiture {
 	private MorceauRoute morceauRoute;
 	
 	//Les voitures peuvent avoir une visibilité sur des semaphores
-	private Collection<Semaphore> semaphoresVisibles = new ArrayList<Semaphore>(); 
+	private ArrayList<Semaphore> semaphoresVisibles = new ArrayList<Semaphore>(); 
 	
 	// A definir : facon de concevoir l'état courant de la voiture
 	private EtatCourant etatCourant;
+	
+	public void vitesseActuelle(){
+		
+	}
 	
 }
