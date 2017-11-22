@@ -6,17 +6,29 @@ import java.util.Collection;
 public class Voiture {
 	private ReseauRoutier reseau;
 	private int identifiant;
-	private double longueur; 
 	private double vitesseMax; 
 	private MorceauRoute morceauRoute;
-	
-	//Les voitures peuvent avoir une visibilité sur des semaphores
-	private ArrayList<Semaphore> semaphoresVisibles = new ArrayList<Semaphore>(); 
-	
-	// A definir : facon de concevoir l'état courant de la voiture
 	private EtatCourant etatCourant;
 	
-	public void vitesseActuelle(){
+	
+	public double getVitesseActuelle(){
+			return this.etatCourant.getVitesseCourante();
+	}
+	
+	public double calculeVitesseActuelle(){
+		/*Prend en compte tous les cas de l'énoncé*/
+		/*Pour tous les morceaux route on doit regarder s'il y a un semaphore */
+		
+		/*Si semaphore est feuTrico et orange vitesseAct /2*/
+		return this.vitesseMax; 
+	}
+	
+	
+	
+	public static void main(String[] args){
+		Voiture v = new Voiture();
+		FeuxTricolore f = new FeuxTricolore();
+		f.attribueCouleurRouge();
 		
 	}
 	

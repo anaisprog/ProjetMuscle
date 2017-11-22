@@ -1,6 +1,9 @@
 package muscletp;
 
 public class FeuxBicolore extends Feux{
+	public FeuxBicolore(){
+		this.type = "FeuxBicolore";
+	}
 	private Couleur couleurActuelle;
 	
 	// Les méthodes qui suivent permettent de définir la couleur du feu

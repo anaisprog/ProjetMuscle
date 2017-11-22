@@ -22,4 +22,7 @@ public class EtatCourant {
 	public void setSegmentRoute(SegmentRoute segmentRoute) {
 		this.segmentRoute = segmentRoute;
 	}
+	public double getVitesseCourante() {
+		return vitesseCourante;
+	}
 }
