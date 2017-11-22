@@ -1,7 +1,7 @@
 package muscletp;
 
 public class ElementRegulation {
-	/*elements logiciels basés sur capteurs et semaphores et régulent la circulation
+	/*elements logiciels bases sur capteurs et semaphores et regulent la circulation
 	 * aux carrefours
 	 */
 	//test

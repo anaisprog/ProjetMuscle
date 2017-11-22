@@ -1,10 +1,14 @@
 package muscletp;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class ReseauRoutier {
-	private Collection<SegmentRoute> segmentsRoute;
-	private Collection<Jonction> jonctions; 
-	private Collection<ElementRegulation> elementsRegulation;
+	
+	private ArrayList<SegmentRoute> listeSegmentsRoutes;
+	private ArrayList<Jonction> listeJonctions; 
+	private ArrayList<ElementRegulation> listeElementsRegulation;
+	
+	
 
 }
