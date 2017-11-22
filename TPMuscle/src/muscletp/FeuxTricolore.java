@@ -4,7 +4,7 @@ public class FeuxTricolore extends Feux{
 	private Couleur couleurActuelle;
 	
 	public FeuxTricolore(){
-		this.type = "FeuxTicolore";
+		this.type = "FeuxTricolore";
 	}
 	// Les méthodes qui suivent permettent de définir la couleur du feu
 	public void verifCouleur(){

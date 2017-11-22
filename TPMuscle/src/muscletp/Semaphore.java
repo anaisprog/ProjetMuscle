@@ -14,9 +14,11 @@ public abstract class Semaphore {
 	public Collection<Jonction> getJonctionRegulees() {
 		return jonctionRegulees;
 	}
+	
 	public SegmentRoute getSegment() {
 		return segment;
 	}
+	
 	public PositionSegment getPosition() {
 		return position;
 	}

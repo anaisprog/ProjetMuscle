@@ -1,5 +1,5 @@
 package muscletp;
 
-public class SegmentRoute {
+public class SegmentRoute extends MorceauRoute{
 	private double longueur;
 }
