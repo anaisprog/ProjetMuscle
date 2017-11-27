@@ -3,6 +3,9 @@ package muscletp;
 public class FeuxTricolore extends Feux{
 	private Couleur couleurActuelle;
 	
+	public FeuxTricolore(){
+		this.type = "FeuxTricolore";
+	}
 	// Les méthodes qui suivent permettent de définir la couleur du feu
 	public void verifCouleur(){
 		System.out.println(this.couleurActuelle);
@@ -13,6 +16,7 @@ public class FeuxTricolore extends Feux{
 	}	
 	
 	public void attribueCouleurOrange(){
+		/* Quand un feu tricolore devient ornange la vitesse de la voiture est divisée par deux*/
 		this.setCouleurActuelle(Couleur.ORANGE);
 	}
 	

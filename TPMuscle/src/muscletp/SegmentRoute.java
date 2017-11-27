@@ -1,5 +1,6 @@
 package muscletp;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 public class SegmentRoute extends MorceauRoute {
@@ -25,4 +26,5 @@ public class SegmentRoute extends MorceauRoute {
 		ID++;
 	}
 	
-}
+=======
+
