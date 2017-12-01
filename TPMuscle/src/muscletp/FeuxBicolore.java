@@ -6,7 +6,7 @@ public class FeuxBicolore extends Feux{
 	}
 	private Couleur couleurActuelle;
 	
-	// Les méthodes qui suivent permettent de définir la couleur du feu
+	// Les methodes qui suivent permettent de definir la couleur du feu
 	public void verifCouleur(){
 		System.out.println(this.couleurActuelle);
 	}

@@ -3,8 +3,7 @@ package muscletp;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
-public class Voiture { 
+public class Voiture {
 	private ReseauRoutier reseau;
 	private int identifiant;
 	private double vitesseMax; 
@@ -29,15 +28,14 @@ public class Voiture {
 		/* Si le sémaphore est un feu tricolore on divise par deux la vitesse de la voiture 
 		 * dans le cas où le feu est orange
 		 * Si le feu est rouge la voiture a une vitesse nulle 
-		 * Si le feu est vert elle prend sa vitesse max sauf s'il y a un panneau de limitation de vitesse
+		 * Si le feu est vert elle prend sa vitesse max, s'il y a un panneau de limitation de vitesse ..
 		 */
 			for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
 			
 			if(morceauRoute.sesSemaphores.get(j).getType().equals("FeuxTricolore")) {
+				
 				if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ORANGE){
-					this.setVitesseActuelle((this.etatCourant.getVitesseCourante())/2);
-					System.out.println("OKOK");
-					System.out.println("VITESSE APRES FEU ORANGE " + this.getVitesseActuelle());
+					this.setVitesseActuelle((this.getVitesseActuelle())/2);
 					j++;
 				}
 
@@ -48,18 +46,18 @@ public class Voiture {
 				}
 				
 				else if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.VERT){
-					if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")){
-						this.setVitesseActuelle((((PanneauLimitation) morceauRoute.sesSemaphores.get(j)).getLimitation()));
-					}
-					else{
-						this.setVitesseActuelle(this.vitesseMax);
-					}
+					/* Boolean panneau de limitation : si true la vitesse prend la valeur du panneau*/
 					
+					this.setVitesseActuelle(this.vitesseMax);
+					System.out.println("VITESSE APRES FEU VERT" + this.getVitesseActuelle());
+					j++;
+				}	
 				}
 				/* Les voitures doivent respecter les limitations imposées par un panneau 
 				 * de limitation de vitesse
+				 * On etudie le cas ou il n'y a pas de feux
 				 */
-			}
+			
 			else if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")) {
 				System.out.println(" REDUIT TA VITESSE");
 				if(this.getVitesseActuelle()>(((PanneauLimitation) morceauRoute.sesSemaphores.get(j)).getLimitation())){
@@ -69,10 +67,10 @@ public class Voiture {
 				}	
 			}
 			else{
-				return this.vitesseMax;
+				this.setVitesseActuelle(this.vitesseMax);
 			}
 		}
-		return this.vitesseMax; 
+			return this.getVitesseActuelle();
 	}
 	
 	public void setVitesseMax(double vitesseMax) {

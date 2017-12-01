@@ -13,7 +13,7 @@ public class VoitureTest2 {
 		 //Test pour classe voiture   
 		Voiture v = new Voiture();
 		EtatCourant e = new EtatCourant();
-		e.setVitesseCourante(12000);
+		e.setVitesseCourante(566);
 		v.setEtatCourant(e);
 		v.setVitesseMax(78);
 		ReseauRoutier r = new ReseauRoutier();
@@ -21,12 +21,12 @@ public class VoitureTest2 {
 		FeuxTricolore s2 = new FeuxTricolore();
 		PanneauLimitation pl = new PanneauLimitation();
 		s.attribueCouleurOrange();
-		s2.attribueCouleurRouge();
+		s2.attribueCouleurVerte();
 		SegmentRoute segment = new SegmentRoute();
 		ArrayList<MorceauRoute> segments = new ArrayList<>();
 		ArrayList<Semaphore> semaphores = new ArrayList<>();
 		//semaphores.add(s);
-		//semaphores.add(s2);
+		semaphores.add(s2);
 		semaphores.add(pl);
 		pl.setLimitation(45);
 		segments.add(segment);
@@ -36,6 +36,6 @@ public class VoitureTest2 {
 		v.setReseau(r);
 		v.setMorceauRoute(segment);
 		v.calculeVitesseActuelle();
-		System.out.println(v.calculeVitesseActuelle());
+		//System.out.println(v.calculeVitesseActuelle());
 	}
 }

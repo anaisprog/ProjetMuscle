@@ -1,10 +1,11 @@
 package muscletp;
-
 import java.util.ArrayList;
 
 public abstract class MorceauRoute {
 	
 	protected String type;
+	//Differents types : Segments, Jonction, JSimple, Barriere, Carrefour
+
 	ArrayList<? extends Semaphore> sesSemaphores = new ArrayList<>();
 	
 	public ArrayList<? extends Semaphore> getSesSemaphores() {

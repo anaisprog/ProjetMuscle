@@ -1,6 +1,8 @@
 package muscletp;
 
 public class Feux extends Semaphore{
-		// on définit une enumération pour Couleur qui sera différente selon 
-		//feux bicolores ou tricolores
+		// on dï¿½finit une enumï¿½ration pour Couleur qui sera diffï¿½rente selon 
+		//feux bicolores ou tricolore
+	
+
 }
