@@ -16,3 +16,4 @@ public class PanneauLimitation extends Semaphore{
 		this.limitation = limitation;
 	}
 }
+ 
