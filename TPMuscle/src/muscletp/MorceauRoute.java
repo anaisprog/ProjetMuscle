@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class MorceauRoute {
 	
+	protected String type;
 	ArrayList<? extends Semaphore> sesSemaphores = new ArrayList<>();
 	
 	public ArrayList<? extends Semaphore> getSesSemaphores() {

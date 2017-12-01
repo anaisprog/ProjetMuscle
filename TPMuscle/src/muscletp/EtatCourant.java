@@ -15,6 +15,10 @@ public class EtatCourant {
 		this.position = position;
 	}
 	
+	public void setVitesseCourante(double vitesseCourante) {
+		this.vitesseCourante = vitesseCourante;
+	}
+
 	public SegmentRoute getSegmentRoute() {
 		return segmentRoute;
 	}

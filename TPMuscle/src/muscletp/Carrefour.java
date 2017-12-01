@@ -8,7 +8,9 @@ import java.util.Random;
 public class Carrefour extends Jonction {
 	ArrayList<SegmentRoute> segments = new ArrayList<SegmentRoute>();
 	
-	
+	public Carrefour(){
+		
+	}
 	// Cette méthode permettra de choisir aléatoirement le segment sur lequel la voiture continuera
 	// de rouler
 	public SegmentRoute choixRoute(Voiture v){
