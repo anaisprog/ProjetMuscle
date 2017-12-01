@@ -7,7 +7,7 @@ public class PanneauLimitation extends Semaphore{
 		this.type = "PanneauLimitation";
 		
 	}
-
+	
 	public int getLimitation() {
 		return limitation;
 	}

@@ -10,7 +10,7 @@ public class VoitureTest2 {
 
 	@Test
 	public void test() {
-		 //Test pour classe voiture 
+		 //Test pour classe voiture  
 		Voiture v = new Voiture();
 		EtatCourant e = new EtatCourant();
 		e.setVitesseCourante(12000);
