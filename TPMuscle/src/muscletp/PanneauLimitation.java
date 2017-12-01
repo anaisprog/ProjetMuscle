@@ -3,7 +3,6 @@ package muscletp;
 public class PanneauLimitation extends Semaphore{
 	
 	private int limitation;
-	
 	public PanneauLimitation(){
 		this.type = "PanneauLimitation";
 		

@@ -9,7 +9,7 @@ public class PositionVoiture {
 			" Position sur le segment : " + position );
 		return position;
 	}
-
+ 
 	public SegmentRoute getSegmentRoute() {
 		return segmentRoute;
 	}

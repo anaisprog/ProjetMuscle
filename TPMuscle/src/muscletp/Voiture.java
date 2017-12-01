@@ -12,8 +12,6 @@ public class Voiture {
 	
 	/* TODO : regarder le cas de la barriere ... PENSEZ A OBSERVER*/
 	
-	
-	
 	public double getVitesseActuelle(){
 			return this.etatCourant.getVitesseCourante();
 	}
