@@ -46,13 +46,17 @@ public class Voiture {
 				}
 				
 				else if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.VERT){
-					/* Boolean panneau de limitation : si true la vitesse prend la valeur du panneau*/
-					
-					this.setVitesseActuelle(this.vitesseMax);
+					if(limitationVitesse()){
+						this.setVitesseActuelle(this.valeurLimitationVitesse());
+						System.out.println("Tu ne vas pas pouvoir aller au max de tes capa mon grand!");
+					}
+					else{
+						this.setVitesseActuelle(this.vitesseMax);
+					}
 					System.out.println("VITESSE APRES FEU VERT" + this.getVitesseActuelle());
 					j++;
 				}	
-				}
+			}
 				/* Les voitures doivent respecter les limitations imposées par un panneau 
 				 * de limitation de vitesse
 				 * On etudie le cas ou il n'y a pas de feux
@@ -73,6 +77,36 @@ public class Voiture {
 			return this.getVitesseActuelle();
 	}
 	
+	public int getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(int identifiant) {
+		this.identifiant = identifiant;
+	}
+
+	/*Cette methode renvoie true s'il y a une limitation de vitesse a respecter par la voiture*/
+	public boolean limitationVitesse() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/* Méthode renvoyant la valeur de la limitation de vitesse s'il y a un panneau*/
+	
+	public int valeurLimitationVitesse() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")){
+				return ((PanneauLimitation)morceauRoute.sesSemaphores.get(j)).getLimitation();
+			}
+		}
+		return 0;
+	}
+	
+
 	public void setVitesseMax(double vitesseMax) {
 		this.vitesseMax = vitesseMax;
 	}

@@ -28,7 +28,7 @@ public class VoitureTest2 {
 		//semaphores.add(s);
 		semaphores.add(s2);
 		semaphores.add(pl);
-		pl.setLimitation(45);
+		pl.setLimitation(50);
 		segments.add(segment);
 		r.setSesRoutes(segments);
 		r.getSesRoutes().get(0).setSesSemaphores(semaphores);

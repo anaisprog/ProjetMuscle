@@ -7,9 +7,8 @@ import java.util.Random;
 
 public class Carrefour extends Jonction {
 	ArrayList<SegmentRoute> segments = new ArrayList<SegmentRoute>();
-	
-
 	// Cette méthode permettra de choisir aléatoirement le segment sur lequel la voiture continuera
+	
 	public Carrefour()
 	{
 		this.type = "Carrefour";
@@ -42,5 +41,23 @@ public class Carrefour extends Jonction {
 		pV.setPosition(34.0);
 		pV.setSegmentRoute(s2);
 		pV.getPosition();
-		}
+	}
+
+	@Override
+	public void register(Observer o) {
+		// TODO Auto-generated method stub		
+	}
+
+	
+	@Override
+	public void unregister(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObserver() {
+		// TODO Auto-generated method stub
+		
+	}
 	}

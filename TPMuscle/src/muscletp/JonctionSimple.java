@@ -12,4 +12,25 @@ public class JonctionSimple extends Jonction{
 		this.nbSegmentPossible = 2;
 		this.type = "JSimple";
 	}
+
+
+	@Override
+	public void register(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void unregister(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void notifyObserver() {
+		// TODO Auto-generated method stub
+		
+	}
 }
