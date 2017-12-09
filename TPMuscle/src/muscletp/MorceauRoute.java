@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public abstract class MorceauRoute implements Observable{
 	// On realise une liste d'observers qui suivent les notifications de MorceauRoute
 	protected ArrayList<Observer> observers = new ArrayList<>();
-	
 	protected String type;
 	//Differents types : Segments, Jonction, JSimple, Barriere, Carrefour
 
@@ -27,5 +26,13 @@ public abstract class MorceauRoute implements Observable{
 		return sesCapteurs;
 	}
 	ArrayList<? extends Capteur> sesCapteurs = new ArrayList<>(); 
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 }

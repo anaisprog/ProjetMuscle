@@ -9,12 +9,20 @@ public class SegmentRoute extends MorceauRoute {
 	//Un identifiant unique pour chaque segment de route
 	private static int ID = 1;
 	private int id;
-	private VoieDroite voieDroite = new VoieDroite();
-	private VoieGauche voieGauche = new VoieGauche();	
+	private ArrayList<Voiture> voieGauche;
+	private ArrayList<Voiture> voieDroite;
+	private ArrayList<Jonction> sesJonctions;
 	private int identifiantVoitureVG;
 	private int identifiantVoitureVD;
 	private boolean nouvelleVoitureVG;
 	private boolean nouvelleVoitureVD;
+	
+	//Bloc d'initialisation
+	{
+		voieGauche = new ArrayList<Voiture>();
+		voieDroite = new ArrayList<Voiture>();
+		sesJonctions = new ArrayList<Jonction>();
+	}
 	
 	//Constructeur
 	public SegmentRoute()
@@ -24,20 +32,67 @@ public class SegmentRoute extends MorceauRoute {
 		ID++;
 	}
 	
-	/* A chaque fois qu'une voiture est ajouté on notifie le capteur*/
+	public SegmentRoute(int id)
+	{
+		this.id = id;
+		this.type = "Segment";
+
+	}
+
+	public int getLongueur() {
+		return longueur;
+	}
+
+	public void setLongueur(int longueur) {
+		this.longueur = longueur;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public ArrayList<Voiture> getVoieGauche() {
+		return voieGauche;
+	}
+
+	public void setVoieGauche(ArrayList<Voiture> voieGauche) {
+		this.voieGauche = voieGauche;
+	}
+
+	public ArrayList<Voiture> getVoieDroite() {
+		return voieDroite;
+	}
+
+	public void setVoieDroite(ArrayList<Voiture> voieDroite) {
+		this.voieDroite = voieDroite;
+	}
+
+	public ArrayList<Jonction> getSesJonctions() {
+		return sesJonctions;
+	}
+
+	public void setSesJonctions(ArrayList<Jonction> sesJonctions) {
+		this.sesJonctions = sesJonctions;
+	}
+	
+	/* A chaque fois qu'une voiture est ajoutï¿½ on notifie le capteur*/
 	
 	public void ajoutVoiture(Voiture v, Voie voie){
 		/*Dans tous les cas on notifie le capteur (observer)*/
-		/* On traite séparement les cas des voies droites et gauches*/
+		/* On traite sï¿½parement les cas des voies droites et gauches*/
 		
-		if(voie.getType().equals("VoieGauche")){
-			voieGauche.addVoiture(v);
+		if(voie.getType().equals("Gauche")){
+			voie.addVoiture(v);
 			identifiantVoitureVG = v.getIdentifiant();
 			nouvelleVoitureVG = true;
 			notifyObserver();
 		}
-		else if(voie.getType().equals("VoieDroite")){
-			voieDroite.addVoiture(v);
+		else if(voie.getType().equals("Droite")){
+			voie.addVoiture(v);
 			identifiantVoitureVD = v.getIdentifiant();
 			nouvelleVoitureVD = true;
 			notifyObserver();
@@ -62,19 +117,6 @@ public class SegmentRoute extends MorceauRoute {
 	public int getIdentifiantVoitureVD() {
 		return identifiantVoitureVD;
 	}
-
-	public VoieDroite getVoieDroite() {
-		return voieDroite;
-	}
-	public void setVoieDroite(VoieDroite voieDroite) {
-		this.voieDroite = voieDroite;
-	}
-	public VoieGauche getVoieGauche() {
-		return voieGauche;
-	}
-	public void setVoieGauche(VoieGauche voieGauche) {
-		this.voieGauche = voieGauche;
-	}
 	
 	@Override
 	public void register(Observer o) {
@@ -93,14 +135,6 @@ public class SegmentRoute extends MorceauRoute {
 		for(Observer o: observers){
 			o.update(this);
 		}
-	}
-
-	public int getLongueur() {
-		return longueur;
-	}
-// chaque fois que la lg change, on le notifie
-	public void setLongueur(int longueur) {
-		this.longueur = longueur;
 	}
 	
 }

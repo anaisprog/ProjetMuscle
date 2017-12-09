@@ -2,8 +2,16 @@ package muscletp;
 
 import java.util.ArrayList;
 
-public abstract class Voie {
-
+public class Voie {
+	
+	protected ArrayList<Voiture> voitures = new ArrayList<Voiture>();
+	protected String type;
+	
+	
+	public Voie(String type)
+	{
+		this.type = type;
+	}
 	public String getType() {
 		return type;
 	}
@@ -11,9 +19,6 @@ public abstract class Voie {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	protected ArrayList<Voiture> voitures = new ArrayList<Voiture>();
-	protected String type;
 
 	public ArrayList<Voiture> getVoitures() {
 		return voitures;
@@ -24,9 +29,11 @@ public abstract class Voie {
 	}
 
 	public void addVoiture(Voiture v) {
-		// TODO Auto-generated method stub
 		this.getVoitures().add(v);
 	}
+	
+
+
 	
 	
 	
