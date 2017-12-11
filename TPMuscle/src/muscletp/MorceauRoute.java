@@ -1,17 +1,20 @@
 package muscletp;
-import java.awt.List;
 import java.util.ArrayList;
 
 /* Les morceaux routes notifie les capteurs 
  * du passage de voitures
  */
-public abstract class MorceauRoute implements Observable{
+public abstract class MorceauRoute implements Observable
+{
 	// On realise une liste d'observers qui suivent les notifications de MorceauRoute
 	protected ArrayList<Observer> observers = new ArrayList<>();
-	protected String type;
+	
 	//Differents types : Segments, Jonction, JSimple, Barriere, Carrefour
-
-	ArrayList<? extends Semaphore> sesSemaphores = new ArrayList<>();
+	protected String type;
+	
+	protected ArrayList<? extends Semaphore> sesSemaphores = new ArrayList<>();
+	ArrayList<? extends Capteur> sesCapteurs = new ArrayList<>(); 
+	
 	
 	public ArrayList<? extends Semaphore> getSesSemaphores() {
 		return sesSemaphores;
@@ -25,7 +28,7 @@ public abstract class MorceauRoute implements Observable{
 	public ArrayList<? extends Capteur> getSesCapteurs() {
 		return sesCapteurs;
 	}
-	ArrayList<? extends Capteur> sesCapteurs = new ArrayList<>(); 
+	
 	
 	public String getType() {
 		return type;

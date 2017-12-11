@@ -1,6 +1,5 @@
 package muscletp;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 public class SegmentRoute extends MorceauRoute {
@@ -9,9 +8,10 @@ public class SegmentRoute extends MorceauRoute {
 	//Un identifiant unique pour chaque segment de route
 	private static int ID = 1;
 	private int id;
-	private ArrayList<Voiture> voieGauche;
-	private ArrayList<Voiture> voieDroite;
+	private Voie voieGauche;
+	private Voie voieDroite;
 	private ArrayList<Jonction> sesJonctions;
+	private ArrayList<Voiture> sesVoitures;
 	private int identifiantVoitureVG;
 	private int identifiantVoitureVD;
 	private boolean nouvelleVoitureVG;
@@ -19,9 +19,10 @@ public class SegmentRoute extends MorceauRoute {
 	
 	//Bloc d'initialisation
 	{
-		voieGauche = new ArrayList<Voiture>();
-		voieDroite = new ArrayList<Voiture>();
+		voieGauche = new Voie("Gauche",this);
+		voieDroite = new Voie("Droite",this);
 		sesJonctions = new ArrayList<Jonction>();
+		sesVoitures = new ArrayList<Voiture>();
 	}
 	
 	//Constructeur
@@ -32,9 +33,10 @@ public class SegmentRoute extends MorceauRoute {
 		ID++;
 	}
 	
-	public SegmentRoute(int id)
+	public SegmentRoute(int id, int longueur)
 	{
 		this.id = id;
+		this.longueur = longueur;
 		this.type = "Segment";
 
 	}
@@ -55,19 +57,19 @@ public class SegmentRoute extends MorceauRoute {
 		this.id = id;
 	}
 
-	public ArrayList<Voiture> getVoieGauche() {
+	public Voie getVoieGauche() {
 		return voieGauche;
 	}
 
-	public void setVoieGauche(ArrayList<Voiture> voieGauche) {
+	public void setVoieGauche(Voie voieGauche) {
 		this.voieGauche = voieGauche;
 	}
 
-	public ArrayList<Voiture> getVoieDroite() {
+	public Voie getVoieDroite() {
 		return voieDroite;
 	}
 
-	public void setVoieDroite(ArrayList<Voiture> voieDroite) {
+	public void setVoieDroite(Voie voieDroite) {
 		this.voieDroite = voieDroite;
 	}
 
@@ -79,20 +81,28 @@ public class SegmentRoute extends MorceauRoute {
 		this.sesJonctions = sesJonctions;
 	}
 	
-	/* A chaque fois qu'une voiture est ajout� on notifie le capteur*/
+	/* A chaque fois qu'une voiture est ajoute on notifie le capteur*/
 	
+	public ArrayList<Voiture> getSesVoitures() {
+		return sesVoitures;
+	}
+
+	public void setSesVoitures(ArrayList<Voiture> sesVoitures) {
+		this.sesVoitures = sesVoitures;
+	}
+
 	public void ajoutVoiture(Voiture v, Voie voie){
 		/*Dans tous les cas on notifie le capteur (observer)*/
 		/* On traite s�parement les cas des voies droites et gauches*/
 		
 		if(voie.getType().equals("Gauche")){
-			voie.addVoiture(v);
+			voie.addVoiture(v,0);
 			identifiantVoitureVG = v.getIdentifiant();
 			nouvelleVoitureVG = true;
 			notifyObserver();
 		}
 		else if(voie.getType().equals("Droite")){
-			voie.addVoiture(v);
+			voie.addVoiture(v,0);
 			identifiantVoitureVD = v.getIdentifiant();
 			nouvelleVoitureVD = true;
 			notifyObserver();

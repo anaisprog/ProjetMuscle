@@ -32,8 +32,8 @@ public class Capteur implements Observer{
 		sujet.register(obs1);
 		Voiture v = new Voiture();
 		v.setIdentifiant(34);
-		Voie vG = new Voie("Gauche");
-		Voie vD = new Voie("Droite");
+		Voie vG = new Voie("Gauche",sujet);
+		Voie vD = new Voie("Droite",sujet);
 		//vG.addVoiture(v);
 		//vG.addVoiture(v);
 		//sujet.ajoutVoitureVG(v);

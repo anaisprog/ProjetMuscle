@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class Voie {
 	
-	protected ArrayList<Voiture> voitures = new ArrayList<Voiture>();
-	protected String type;
+	private Voiture[] voitures ;
+	private String type;
+	private SegmentRoute sonSegment;
 	
-	
-	public Voie(String type)
+	public Voie(String type, SegmentRoute s)
 	{
 		this.type = type;
+		this.sonSegment =s;
 	}
 	public String getType() {
 		return type;
@@ -20,16 +21,16 @@ public class Voie {
 		this.type = type;
 	}
 
-	public ArrayList<Voiture> getVoitures() {
+	public Voiture[] getVoitures() {
 		return voitures;
 	}
 
-	public void setVoitures(ArrayList<Voiture> voitures) {
+	public void setVoitures(Voiture[] voitures) {
 		this.voitures = voitures;
 	}
 
-	public void addVoiture(Voiture v) {
-		this.getVoitures().add(v);
+	public void addVoiture(Voiture v, int pos) {
+		this.voitures[pos]= v;
 	}
 	
 

@@ -1,14 +1,20 @@
 package muscletp;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class Voiture {
 	private ReseauRoutier reseau;
 	private int identifiant;
 	private double vitesseMax; 
 	private MorceauRoute morceauRoute;
 	private EtatCourant etatCourant;
+	private static int ID = 1;
+	private int position;
+	private int sens; // 1 ou -1
+	
+	public Voiture()
+	{
+		this.identifiant = ID;
+		ID++;
+	}
 	
 	/* TODO : regarder le cas de la barriere ... PENSEZ A OBSERVER*/
 	
@@ -25,8 +31,8 @@ public class Voiture {
 	}
 
 	public double calculeVitesseActuelle() {
-		/* Si le sémaphore est un feu tricolore on divise par deux la vitesse de la voiture 
-		 * dans le cas où le feu est orange
+		/* Si le semaphore est un feu tricolore on divise par deux la vitesse de la voiture 
+		 * dans le cas ou le feu est orange
 		 * Si le feu est rouge la voiture a une vitesse nulle 
 		 * Si le feu est vert elle prend sa vitesse max, s'il y a un panneau de limitation de vitesse ..
 		 */
@@ -57,7 +63,7 @@ public class Voiture {
 					j++;
 				}	
 			}
-				/* Les voitures doivent respecter les limitations imposées par un panneau 
+				/* Les voitures doivent respecter les limitations imposï¿½es par un panneau 
 				 * de limitation de vitesse
 				 * On etudie le cas ou il n'y a pas de feux
 				 */
@@ -95,7 +101,7 @@ public class Voiture {
 		return false;
 	}
 	
-	/* Méthode renvoyant la valeur de la limitation de vitesse s'il y a un panneau*/
+	/* Methode renvoyant la valeur de la limitation de vitesse s'il y a un panneau*/
 	
 	public int valeurLimitationVitesse() {
 		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
@@ -138,5 +144,23 @@ public class Voiture {
 	public void setMorceauRoute(MorceauRoute morceauRoute) {
 		this.morceauRoute = morceauRoute;
 	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public int getSens() {
+		return sens;
+	}
+
+	public void setSens(int sens) {
+		this.sens = sens;
+	}
+	
+	
 	
 }
