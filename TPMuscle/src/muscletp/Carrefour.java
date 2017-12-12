@@ -29,38 +29,4 @@ public class Carrefour extends Jonction {
 		return segments.get(random);
 	}
 	
-	public static void main(String[] args){
-		Voiture v = new Voiture();
-		Carrefour c = new Carrefour();
-		SegmentRoute s = new SegmentRoute();
-		SegmentRoute s2 = new SegmentRoute();
-		SegmentRoute s3 = new SegmentRoute();
-		c.segments.add(s);
-		c.segments.add(s2);
-		c.segments.add(s3);
-		System.out.println(c.choixRoute(v));
-		
-		PositionVoiture pV = new PositionVoiture();
-		pV.setPosition(34.0);
-		pV.setSegmentRoute(s2);
-		pV.getPosition();
-	}
-
-	@Override
-	public void register(Observer o) {
-		// TODO Auto-generated method stub		
-	}
-
-	
-	@Override
-	public void unregister(Observer o) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObserver() {
-		// TODO Auto-generated method stub
-		
-	}
-	}
+}

@@ -27,25 +27,4 @@ public class Barriere extends Jonction{
 	public void setS1(SegmentRoute s1) {
 		this.s1 = s1;
 	}
-	
-	@Override
-	public void register(Observer o) 
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void unregister(Observer o) 
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notifyObserver() 
-	{
-		// TODO Auto-generated method stub
-	}
-	
-	
 }

@@ -173,7 +173,7 @@ public class ReseauRoutier {
 						//On renseigne le segment à la voiture
 						v.setMorceauRoute(s);
 						//On ajoute à la liste de voiture du segment
-						((SegmentRoute) s).getSesVoitures().add(v);
+						s.getSesVoitures().add(v);
 						//On lui ajoute une position
 						v.setPosition(1);
 						

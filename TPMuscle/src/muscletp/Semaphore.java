@@ -5,11 +5,12 @@ import java.util.Collection;
 
 public abstract class Semaphore {
 	
-	//A voir  peut etre de la généricité à ce niveau ou avec element de régulation...
+	//A voir  peut etre de la gï¿½nï¿½ricitï¿½ ï¿½ ce niveau ou avec element de rï¿½gulation...
 	Collection<Jonction> jonctionRegulees = new ArrayList<Jonction>();
 	private SegmentRoute segment;
 	private PositionSegment position;
 	protected String type;
+	protected int sens;
 	
 	public Collection<Jonction> getJonctionRegulees() {
 		return jonctionRegulees;
@@ -25,4 +26,14 @@ public abstract class Semaphore {
 	public String getType() {
 		return type;
 	}
+
+	public int getSens() {
+		return sens;
+	}
+
+	public void setSens(int sens) {
+		this.sens = sens;
+	}
+	
+	
 }
