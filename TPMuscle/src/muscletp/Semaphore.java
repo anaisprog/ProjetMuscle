@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class Semaphore {
-	
-	//A voir  peut etre de la genericite a ce niveau ou avec element de r�gulation...
+
 	Collection<Jonction> jonctionRegulees = new ArrayList<Jonction>();
-	private SegmentRoute segment;
+	protected SegmentRoute segment;
 	protected String type;
 	protected int sens;
 	
@@ -34,8 +33,5 @@ public abstract class Semaphore {
 	public void setSegment(SegmentRoute segment) {
 		this.segment = segment;
 	}
-	
-	
-	
-	
+
 }

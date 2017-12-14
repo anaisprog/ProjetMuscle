@@ -13,11 +13,14 @@ public class CapteurPresence extends Capteur {
 	
 	public boolean detecteVoiture()
 	{
-		if((this.sonMorceauRoute.getVoiture(this.saPosition, this.sonSens)!=null)){
-			System.out.println("--------Capteur de Presence--------");
+		if((this.sonMorceauRoute.getVoiture(this.saPosition, this.sonSens)!=null))
+		{
+			System.out.println("\n--------Capteur de Presence--------");
 			System.out.println("La voiture " + this.sonMorceauRoute.getVoiture(this.saPosition, this.sonSens).getIdentifiant() + " a ete detectee.");
+			System.out.println("------------------------------");
 			return true;
 		}
 		return false;
 	}
+
  }

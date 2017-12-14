@@ -2,6 +2,7 @@ package muscletp;
 
 import java.util.ArrayList;
 
+
 public class Voiture {
 	private ReseauRoutier reseau;
 	private int infinity = Integer.MAX_VALUE;
@@ -13,6 +14,7 @@ public class Voiture {
 	private int sens; // 1 ou -1
 	private int vitesseCourante; //ETATCOURANT
 	int distanceRestante;
+
 	
 	public Voiture()
 	{
@@ -21,37 +23,36 @@ public class Voiture {
 	}
 	
 	//Ajoute pour les tests: 
-	public Voiture(int vitesseMax, MorceauRoute morceauRoute, int position, int sens){
+	public Voiture(int vitesseMax, MorceauRoute morceauRoute, int position, int sens)
+	{
 		this.vitesseMax = vitesseMax;
 		this.morceauRoute = morceauRoute;
 		this.position = position;
 		this.sens = sens;
 
-		
 	}
-		
-	public int getVitesseCourante() {
-		return vitesseCourante;
+
+	public int getVitesseCourante() 
+	{
+		return this.vitesseCourante;
 	}
 
 
 	public void setVitesseCourante(int vitesseCourante) {
 		this.vitesseCourante = vitesseCourante;
 	}
-	
-	public int getIdentifiant() {
+
+	public int getIdentifiant() 
+	{
 		return identifiant;
 	}
+
 
 	public void setIdentifiant(int identifiant) {
 		this.identifiant = identifiant;
 	}
 	
-	public void ralentir(){
-		this.setVitesseCourante(this.getVitesseCourante()/2);
-	}
 	
-
 	public void setVitesseMax(double vitesseMax) {
 		this.vitesseMax = vitesseMax;
 	}
@@ -92,58 +93,79 @@ public class Voiture {
 		this.sens = sens;
 	}
 	
-	//A modifier
+	
+	public void ralentir(){
+		this.setVitesseCourante(this.getVitesseCourante()/2);
+	}
+		
+	public boolean feuVert() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if((morceauRoute.sesSemaphores.get(j).getType().equals("FeuxTricolore"))&&((morceauRoute.sesSemaphores.get(j).getSens() == this.sens))) 
+			{	
+				if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.VERT){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean feuOrange() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if((morceauRoute.sesSemaphores.get(j).getType().equals("FeuxTricolore"))&&((morceauRoute.sesSemaphores.get(j).getSens() == this.sens))) 
+			{	
+				if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ORANGE){
+					return true;
+				}
+			}
+			j++;
+		}
+		return false;
+	}
+	
+	public boolean feuRouge() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if((morceauRoute.sesSemaphores.get(j).getType().equals("FeuxTricolore"))&&((morceauRoute.sesSemaphores.get(j).getSens() == this.sens))) 
+			{	
+				if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ROUGE){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public double calculeVitesseActuelle() {
 		/* Si le sémaphore est un feu tricolore on divise par deux la vitesse de la voiture 
 		 * dans le cas où le feu est orange
 		 * Si le feu est rouge la voiture a une vitesse nulle 
 		 * Si le feu est vert elle prend sa vitesse max, s'il y a un panneau de limitation de vitesse ..
 		 */
-			for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
-			
-			if((morceauRoute.sesSemaphores.get(j).getType().equals("FeuxTricolore"))&&((morceauRoute.sesSemaphores.get(j).getSens() == this.sens))) 
-			{
-				
-				if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ORANGE){
-					this.setVitesseCourante((this.getVitesseCourante())/2);
-					j++;
-				}
+		if(feuVert()){
+			this.setVitesseCourante(this.getVitesseCourante());
+		}
+		else if(feuOrange()){
+			this.setVitesseCourante((this.getVitesseCourante())/2);
+		}
+		else if(feuRouge()){
+			this.setVitesseCourante(0);
+		}
+		return this.getVitesseCourante();
 
-				else if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ROUGE){
-					this.setVitesseCourante(0);
-					//System.out.println("VITESSE APRES FEU ROUGE" + this.getVitesseCourante());
-					j++;
-				}
-				
-				else if(((FeuxTricolore) morceauRoute.sesSemaphores.get(j)).getCouleurActuelle()==Couleur.VERT){
-					if(limitationVitesse()){
-						this.setVitesseCourante(this.valeurLimitationVitesse());
-					}
-					else{
-						this.setVitesseCourante(this.vitesseCourante);
-					}
-					//System.out.println("VITESSE APRES FEU VERT" + this.vitesseCourante);
-					j++;
-				}	
-			}
-				/* Les voitures doivent respecter les limitations imposées par un panneau 
-				 * de limitation de vitesse
-				 * On etudie le cas ou il n'y a pas de feux
-				 */
-			
-			else if((morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation"))&&(morceauRoute.sesSemaphores.get(j).sens == this.sens)) {
-				if(this.getVitesseCourante()>(((PanneauLimitation) morceauRoute.sesSemaphores.get(j)).getLimitation())){
-					this.setVitesseCourante((((PanneauLimitation) morceauRoute.sesSemaphores.get(j)).getLimitation()));
-					System.out.println("La nouvelle valeur de vitesse est " + this.getVitesseCourante());
-					j++;
-				}	
-			}
-			else{
-				this.setVitesseCourante(this.vitesseCourante);
+	}
+
+	/* Methode renvoyant la valeur de la limitation de vitesse s'il y a un panneau*/
+	
+	public int valeurLimitationVitesse() {
+		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
+			if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")){
+				return ((PanneauLimitation)morceauRoute.sesSemaphores.get(j)).getLimitation();
 			}
 		}
-			return this.getVitesseCourante();
+		return infinity;
+
 	}
+	
 
 	/*Cette methode renvoie true s'il y a une limitation de vitesse a respecter par la voiture*/
 	public boolean limitationVitesse() {
@@ -155,16 +177,6 @@ public class Voiture {
 		return false;
 	}
 	
-	/* Methode renvoyant la valeur de la limitation de vitesse s'il y a un panneau*/
-	
-	public int valeurLimitationVitesse() {
-		for(int j = 0; j< this.morceauRoute.sesSemaphores.size(); j++){
-			if(morceauRoute.sesSemaphores.get(j).getType().equals("PanneauLimitation")){
-				return ((PanneauLimitation)morceauRoute.sesSemaphores.get(j)).getLimitation();
-			}
-		}
-		return infinity;
-	}
 	
 	public void deplacerVoiture(ArrayList<Capteur> capteurs)
 	{
@@ -366,7 +378,6 @@ public class Voiture {
 	{
 		return "| Voiture n°"+this.getIdentifiant()+"\n"+"| Son segment : "+ ((SegmentRoute) this.getMorceauRoute()).getId()+"\n"+"| Sa position : "+this.getPosition() +"\n"+"| Sa vitesse : "+this.getVitesseCourante()+"\n"+"| Son sens : "+this.getSens();
 	}
-	
-	
+
 	
 }

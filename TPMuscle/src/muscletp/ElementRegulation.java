@@ -26,13 +26,15 @@ public class ElementRegulation implements ObserverCapteurVitesse {
 	}
 	
 	@Override
-	public void update(Voiture v) {
-		System.out.println("--------Capteur de Vitesse--------");
+	public void update(Voiture v, int vmax) 
+	{
+		System.out.println("\n--------Capteur de Vitesse--------");
 		System.out.println("Identifiant Voiture : " + v.getIdentifiant());
 		System.out.println("Vitesse Voiture : " + v.getVitesseCourante());
-		if(v.getVitesseCourante()> 6)
+		if(v.getVitesseCourante()> vmax)
 		{
-			System.out.println("Vitesse superieure a la vitesse reglementaire");
+			System.out.println("Vitesse superieure a la vitesse reglementaire : "+vmax);
+			System.out.println("------------------------------");
 			for(int i =0; i<this.sesSemaphores.size(); i++)
 			{
 				if((this.sesSemaphores.get(i).getType()=="FeuxTricolore" || this.sesSemaphores.get(i).getType()=="FeuxBicolore"))
@@ -43,5 +45,5 @@ public class ElementRegulation implements ObserverCapteurVitesse {
 			}
 		}
 	}
-
+		
 }

@@ -10,11 +10,11 @@ public class FeuxTricolore extends Feux{
 	public void verifCouleur(){
 		System.out.println(this.couleurActuelle);
 	}
-	
+	@Override
 	public void attribueCouleurRouge(){
 		this.setCouleurActuelle(Couleur.ROUGE);
 	}	
-	
+	@Override
 	public void attribueCouleurOrange(){
 		/* Quand un feu tricolore devient ornange la vitesse de la voiture est divisée par deux*/
 		this.setCouleurActuelle(Couleur.ORANGE);
@@ -23,8 +23,7 @@ public class FeuxTricolore extends Feux{
 	public void attribueCouleurVerte(){
 		this.setCouleurActuelle(Couleur.VERT);
 	}
-	
-	
+	@Override
 	public Couleur getCouleurActuelle() {
 		return couleurActuelle;
 	}

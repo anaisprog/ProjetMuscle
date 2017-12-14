@@ -3,7 +3,6 @@ package muscletp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.text.Segment;
 
 
 public class ReseauRoutier {
@@ -22,6 +21,7 @@ public class ReseauRoutier {
 	}
 	
 	public ArrayList<MorceauRoute> getSesRoutes() 
+
 	{
 		return sesRoutes;
 	}
@@ -60,83 +60,84 @@ public class ReseauRoutier {
 		//Il sera constitue d'une barriere, deux passages pietons, deux carrefours en T et un a 4 voies
 		
 		//Creation des trois segments de routes
-		SegmentRoute s7 = new SegmentRoute(7, 2); 
-		SegmentRoute s6 = new SegmentRoute(6,8);
-		SegmentRoute s8 = new SegmentRoute(8,2);
-		this.sesRoutes.add(s7);
-		this.sesRoutes.add(s6);
-		this.sesRoutes.add(s8);
-		
-		//Creation de la barriere
-		Barriere barriere = new Barriere(s7);
-		//barriere.getSesSegments().add(s7);
-		this.sesRoutes.add(barriere);
-		
-		//Creation de la jonction : un carrefour en T
-		Carrefour carrefour1 = new Carrefour(s7,s8,s6);
-		//carrefour1.getSesSegments().add(s7);
-		//carrefour1.getSesSegments().add(s6);
-		//carrefour1.getSesSegments().add(s8);
-		this.sesRoutes.add(carrefour1);
-		
-		SegmentRoute s5 = new SegmentRoute(5, 2); 
-		SegmentRoute s4 = new SegmentRoute(4,5);
-		this.sesRoutes.add(s5);
-		this.sesRoutes.add(s4);
-		Carrefour carrefour2 = new Carrefour(s6,s4,s5);
-		this.sesRoutes.add(carrefour2);
-		
-		SegmentRoute s1 = new SegmentRoute(1, 4); 
-		this.sesRoutes.add(s1);
-		JonctionSimple js1 = new JonctionSimple(s1, s5,false);
-		this.sesRoutes.add(js1);
+				SegmentRoute s7 = new SegmentRoute(7, 2); 
+				SegmentRoute s6 = new SegmentRoute(6,8);
+				SegmentRoute s8 = new SegmentRoute(8,2);
+				this.sesRoutes.add(s7);
+				this.sesRoutes.add(s6);
+				this.sesRoutes.add(s8);
+				
+				//Creation de la barriere
+				Barriere barriere = new Barriere(s7);
+				//barriere.getSesSegments().add(s7);
+				this.sesRoutes.add(barriere);
+				
+				//Creation de la jonction : un carrefour en T
+				Carrefour carrefour1 = new Carrefour(s7,s8,s6);
+				//carrefour1.getSesSegments().add(s7);
+				//carrefour1.getSesSegments().add(s6);
+				//carrefour1.getSesSegments().add(s8);
+				this.sesRoutes.add(carrefour1);
+				
+				SegmentRoute s5 = new SegmentRoute(5, 2); 
+				SegmentRoute s4 = new SegmentRoute(4,5);
+				this.sesRoutes.add(s5);
+				this.sesRoutes.add(s4);
+				Carrefour carrefour2 = new Carrefour(s6,s4,s5);
+				this.sesRoutes.add(carrefour2);
+				
+				SegmentRoute s1 = new SegmentRoute(1, 4); 
+				this.sesRoutes.add(s1);
+				JonctionSimple js1 = new JonctionSimple(s1, s5,false);
+				this.sesRoutes.add(js1);
 
-		
-		SegmentRoute s3 = new SegmentRoute(3, 7); 
-		this.sesRoutes.add(s3);
-		JonctionSimple js2 = new JonctionSimple(s3, s4,true);
-		this.sesRoutes.add(js2);
-		
-		SegmentRoute s2 = new SegmentRoute(2, 3); 
-		this.sesRoutes.add(s2);
-		Carrefour carrefour4 = new Carrefour (s8,s3,s1,s2);
-		this.sesRoutes.add(carrefour4);
+				
+				SegmentRoute s3 = new SegmentRoute(3, 7); 
+				this.sesRoutes.add(s3);
+				JonctionSimple js2 = new JonctionSimple(s3, s4,true);
+				this.sesRoutes.add(js2);
+				
+				SegmentRoute s2 = new SegmentRoute(2, 3); 
+				this.sesRoutes.add(s2);
+				Carrefour carrefour4 = new Carrefour (s8,s3,s1,s2);
+				this.sesRoutes.add(carrefour4);
 
-		s1.getSesJonctions().add(js1);
-		s1.getSesJonctions().add(carrefour4);
+				s1.getSesJonctions().add(js1);
+				s1.getSesJonctions().add(carrefour4);
+				
+				s2.getSesJonctions().add(barriere);
+				s2.getSesJonctions().add(carrefour4);
+				
+				s3.getSesJonctions().add(js2);
+				s3.getSesJonctions().add(carrefour4);
+				
+				s4.getSesJonctions().add(carrefour2);
+				s4.getSesJonctions().add(js2);
+				
+				s5.getSesJonctions().add(carrefour2);
+				s5.getSesJonctions().add(js1);
+				
+				s6.getSesJonctions().add(carrefour1);
+				s6.getSesJonctions().add(carrefour2);
+				
+				s7.getSesJonctions().add(carrefour1);
+				s7.getSesJonctions().add(barriere);
+				
+				s8.getSesJonctions().add(carrefour4);
+				s8.getSesJonctions().add(carrefour1);
+				
+				//On ajoute les jonctions aux réseaux routiers
+				this.listeJonctions.add(js1);
+				this.listeJonctions.add(js2);
+				this.listeJonctions.add(barriere);
+				this.listeJonctions.add(carrefour1);
+				this.listeJonctions.add(carrefour2);
+				this.listeJonctions.add(carrefour4);
+				
+				//Placement des capteurs
+				this.placementCapteur();
 		
-		s2.getSesJonctions().add(barriere);
-		s2.getSesJonctions().add(carrefour4);
-		
-		s3.getSesJonctions().add(js2);
-		s3.getSesJonctions().add(carrefour4);
-		
-		s4.getSesJonctions().add(carrefour2);
-		s4.getSesJonctions().add(js2);
-		
-		s5.getSesJonctions().add(carrefour2);
-		s5.getSesJonctions().add(js1);
-		
-		s6.getSesJonctions().add(carrefour1);
-		s6.getSesJonctions().add(carrefour2);
-		
-		s7.getSesJonctions().add(carrefour1);
-		s7.getSesJonctions().add(barriere);
-		
-		s8.getSesJonctions().add(carrefour4);
-		s8.getSesJonctions().add(carrefour1);
-		
-		//On ajoute les jonctions aux réseaux routiers
-		this.listeJonctions.add(js1);
-		this.listeJonctions.add(js2);
-		this.listeJonctions.add(barriere);
-		this.listeJonctions.add(carrefour1);
-		this.listeJonctions.add(carrefour2);
-		this.listeJonctions.add(carrefour4);
-		
-		//Placement des capteurs
-		this.placementCapteur();
-		
+
 		/*System.out.println("Affichage de la route");
 		for(Jonction j : this.listeJonctions)
 		{
@@ -146,15 +147,8 @@ public class ReseauRoutier {
 				System.out.println("Segment n° :"+s.getId());
 			}
 		}*/
+
 		
-		/*for(MorceauRoute m : sesRoutes)
-		{
-			if(m.getType().equals("Segment"))
-			{	
-				System.out.println("La prochaine jonction "+ ((SegmentRoute) m ).getId() +" dans le sens 1 est :"+(this.prochaineJonction(1, ((SegmentRoute) m ))).getType());
-				System.out.println("La prochaine jonction de "+ ((SegmentRoute) m ).getId() +" dans le sens -1 est :"+(this.prochaineJonction(-1, ((SegmentRoute) m ))).getType());
-			}
-		}*/
 	}
 	
 	public int random(int max, int min)
@@ -225,7 +219,7 @@ public class ReseauRoutier {
 		getSegmentWithId(1).getSesCapteurs().add(cp2);
 		
 		ElementRegulation er2 = new ElementRegulation();
-		CapteurVitesse cv1 = new CapteurVitesse(er2, getSegmentWithId(3), 1, 3);
+		CapteurVitesse cv1 = new CapteurVitesse(er2, getSegmentWithId(3), 1, 3,2);
 		sesCapteurs.add(cv1);
 		er2.getSesCapteurs().add(cv1);
 		getSegmentWithId(3).getSesCapteurs().add(cv1);
@@ -352,7 +346,17 @@ public class ReseauRoutier {
 		{
 			v.deplacerVoiture(sesCapteurs);
 		}
+
 	}
+	
+	public int randomVoiture()
+	{
+		int result = (int) (Math.random() * (8 - 2)) + 2;
+		return result;
+	}
+	
+
+	
 	
 	public static void main(String[] args)
 	{
@@ -365,7 +369,9 @@ public class ReseauRoutier {
 		r.creationReseau();
 		
 		//Calcul du nombre de voitures sur le reseau
+
 		r.setNbVoitures(r.random(9,2));
+
 		System.out.println("Le programme va intégrer "+r.getNbVoitures()+" voitures au réseau routier\n");
 		
 		//Creation et repartition des voitures sur le reseau routier

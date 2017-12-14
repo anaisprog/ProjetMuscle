@@ -13,16 +13,15 @@ public abstract class MorceauRoute
 	
 	//Differents types : Segments, Jonction, JSimple, Barriere, Carrefour
 	protected String type;
-	
 	protected ArrayList<Semaphore> sesSemaphores ;
 	protected ArrayList<Capteur> sesCapteurs ;
+
 	
 	{
 		this.sesVoitures = new ArrayList<Voiture>();
 		this.sesSemaphores = new ArrayList<Semaphore>();
 		this.sesCapteurs = new ArrayList<Capteur>();
 	}
-	
 	
 	public ArrayList<Semaphore> getSesSemaphores() {
 		return sesSemaphores;
@@ -36,7 +35,6 @@ public abstract class MorceauRoute
 	public ArrayList<Capteur> getSesCapteurs() {
 		return sesCapteurs;
 	}
-	
 	public ArrayList<Voiture> getSesVoitures() {
 		return sesVoitures;
 	}
@@ -69,7 +67,7 @@ public abstract class MorceauRoute
 		
 		return null;
 	}
-	
+
 }
 	
 
