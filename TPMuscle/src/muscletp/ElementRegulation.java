@@ -10,27 +10,38 @@ public class ElementRegulation implements ObserverCapteurVitesse {
 	
 	ArrayList<Capteur> sesCapteurs = new ArrayList<>();
 	ArrayList<Semaphore> sesSemaphores = new ArrayList<>();
+	
+	
+	public ArrayList<Capteur> getSesCapteurs() {
+		return sesCapteurs;
+	}
+	public void setSesCapteurs(ArrayList<Capteur> sesCapteurs) {
+		this.sesCapteurs = sesCapteurs;
+	}
+	public ArrayList<Semaphore> getSesSemaphores() {
+		return sesSemaphores;
+	}
+	public void setSesSemaphores(ArrayList<Semaphore> sesSemaphores) {
+		this.sesSemaphores = sesSemaphores;
+	}
+	
 	@Override
-	public void update(int identifiant, double vitesse) {
+	public void update(Voiture v) {
 		System.out.println("--------Capteur de Vitesse--------");
-		System.out.println("Identifiant Voiture : " + identifiant);
-		System.out.println("Vitesse Voiture : " + vitesse);
-		/*Si la vitesse est superieure a la vitesse reglementaire*/
-		if(vitesse> 100){
+		System.out.println("Identifiant Voiture : " + v.getIdentifiant());
+		System.out.println("Vitesse Voiture : " + v.getVitesseCourante());
+		if(v.getVitesseCourante()> 6)
+		{
 			System.out.println("Vitesse superieure a la vitesse reglementaire");
-			//Le semaphore passe au rouge.
+			for(int i =0; i<this.sesSemaphores.size(); i++)
+			{
+				if((this.sesSemaphores.get(i).getType()=="FeuxTricolore" || this.sesSemaphores.get(i).getType()=="FeuxBicolore"))
+				{
+					System.out.println("Le feu du segment numero " + this.sesSemaphores.get(i).getSegment().getId() + " passe au Rouge " );
+					((Feux)(this.sesSemaphores.get(i))).attribueCouleurRouge();
+				}
+			}
 		}
 	}
-	/*public static void main(String[] args){
-		ElementRegulation er = new ElementRegulation();
-		MorceauRoute m = new SegmentRoute();
-		Voie v = new Voie("Gauche");
-		Voiture voit2 = new Voiture(278, m, 2, v);
-		voit2.setVitesseCourante(345);
-		CapteurVitesse cv = new CapteurVitesse(er, m, v, 2);
-		System.out.println("Apres ajout voiture:" + cv.capteurPresence.detectePresence());
-		cv.register(er);
-		cv.recupereVitesse();
-		
-	}*/
+
 }

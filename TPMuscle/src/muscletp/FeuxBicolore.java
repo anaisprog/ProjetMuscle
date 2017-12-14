@@ -11,12 +11,14 @@ public class FeuxBicolore extends Feux{
 		System.out.println(this.couleurActuelle);
 	}
 	
+	@Override
 	public void attribueCouleurRouge(){
 		this.setCouleurActuelle(Couleur.ROUGE);
 	}	
 	
-	public void attribueCouleurVerte(){
-		this.setCouleurActuelle(Couleur.VERT);
+	@Override
+	public void attribueCouleurOrange(){
+		this.setCouleurActuelle(Couleur.ORANGE);
 	}
 	
 	public Couleur getCouleurActuelle() {
@@ -27,11 +29,5 @@ public class FeuxBicolore extends Feux{
 		this.couleurActuelle = couleurActuelle;
 	}
 
-	public static void main(String[] args){
-		
-		FeuxBicolore f = new FeuxBicolore();
-		f.attribueCouleurVerte();
-		f.verifCouleur();
-	}
 }
 

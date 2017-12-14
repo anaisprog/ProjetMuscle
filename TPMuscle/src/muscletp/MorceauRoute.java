@@ -14,28 +14,28 @@ public abstract class MorceauRoute
 	//Differents types : Segments, Jonction, JSimple, Barriere, Carrefour
 	protected String type;
 	
-	protected ArrayList<? extends Semaphore> sesSemaphores = new ArrayList<>();
-	ArrayList<? extends Capteur> sesCapteurs = new ArrayList<>(); 
+	protected ArrayList<Semaphore> sesSemaphores ;
+	protected ArrayList<Capteur> sesCapteurs ;
 	
 	{
 		this.sesVoitures = new ArrayList<Voiture>();
+		this.sesSemaphores = new ArrayList<Semaphore>();
+		this.sesCapteurs = new ArrayList<Capteur>();
 	}
 	
 	
-	public ArrayList<? extends Semaphore> getSesSemaphores() {
+	public ArrayList<Semaphore> getSesSemaphores() {
 		return sesSemaphores;
 	}
-	public void setSesSemaphores(ArrayList<? extends Semaphore> sesSemaphores) {
+	public void setSesSemaphores(ArrayList<Semaphore> sesSemaphores) {
 		this.sesSemaphores = sesSemaphores;
 	}
-	public void setSesCapteurs(ArrayList<? extends Capteur> sesCapteurs) {
+	public void setSesCapteurs(ArrayList<Capteur> sesCapteurs) {
 		this.sesCapteurs = sesCapteurs;
 	}
-	public ArrayList<? extends Capteur> getSesCapteurs() {
+	public ArrayList<Capteur> getSesCapteurs() {
 		return sesCapteurs;
 	}
-	
-	
 	
 	public ArrayList<Voiture> getSesVoitures() {
 		return sesVoitures;
@@ -62,8 +62,7 @@ public abstract class MorceauRoute
 					if(v.getPosition()== position)
 					{
 						return v;
-					}
-				
+					}	
 			}
 			
 		}

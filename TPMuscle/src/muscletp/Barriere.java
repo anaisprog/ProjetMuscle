@@ -6,18 +6,20 @@ public class Barriere extends Jonction{
 	
 	public Barriere(SegmentRoute s)
 	{
-		super();
+		super(s);
 		this.s1 = s;
 		this.type = "Barriere";
+		this.nbSemaphore = 0;
 		this.id = ID;
 		ID++;
 	}
 	
 	public Barriere(SegmentRoute s, int id)
 	{
-		super(id);
+		super(id,s);
 		this.s1 = s;
 		this.type = "Barriere";
+		this.nbSemaphore = 0;
 	}
 
 	public SegmentRoute getS1() {

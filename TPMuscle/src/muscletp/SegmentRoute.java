@@ -61,7 +61,6 @@ public class SegmentRoute extends MorceauRoute {
 	}
 	
 	/* A chaque fois qu'une voiture est ajoute on notifie le capteur*/
-	
 
 
 	public boolean isNouvelleVoitureVG() {
@@ -78,6 +77,16 @@ public class SegmentRoute extends MorceauRoute {
 
 	public int getIdentifiantVoitureVD() {
 		return identifiantVoitureVD;
+	}
+	
+	public Jonction prochaineJonction(int sens)
+	{
+		int ind = 0;
+		if (sens==-1)
+		{
+			ind = 1;
+		}
+		return this.getSesJonctions().get(ind);
 	}
 	
 }

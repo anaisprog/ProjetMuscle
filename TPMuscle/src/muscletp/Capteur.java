@@ -2,9 +2,8 @@ package muscletp;
 
 import java.util.ArrayList;
 
-import javax.swing.text.Segment;
 
-public class Capteur {
+public abstract class Capteur {
 	/* Un capteur est plac� sur un troncon de route et associ� a un element de regulation */
 	
 	protected ArrayList<ObserverCapteurVitesse> observers = new ArrayList<>();
@@ -13,7 +12,58 @@ public class Capteur {
 	protected MorceauRoute sonMorceauRoute;
 	int sonSens;
 	protected int saPosition;
+	protected String type;
 	
+	
+	
+	public ElementRegulation getElemRegulationAssocie() {
+		return elemRegulationAssocie;
+	}
+
+
+
+	public void setElemRegulationAssocie(ElementRegulation elemRegulationAssocie) {
+		this.elemRegulationAssocie = elemRegulationAssocie;
+	}
+
+
+
+	public MorceauRoute getSonMorceauRoute() {
+		return sonMorceauRoute;
+	}
+
+
+
+	public void setSonMorceauRoute(MorceauRoute sonMorceauRoute) {
+		this.sonMorceauRoute = sonMorceauRoute;
+	}
+
+
+
+	public int getSonSens() {
+		return sonSens;
+	}
+
+
+
+	public void setSonSens(int sonSens) {
+		this.sonSens = sonSens;
+	}
+
+
+
+	public int getSaPosition() {
+		return saPosition;
+	}
+
+
+
+	public void setSaPosition(int saPosition) {
+		this.saPosition = saPosition;
+	}
+
+
+
 	public Capteur(ElementRegulation sonElementRegulation, MorceauRoute sonMorceauRoute, int sonSens, int saPosition){
 		this.elemRegulationAssocie = sonElementRegulation;
 		this.sonMorceauRoute = sonMorceauRoute;
