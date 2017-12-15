@@ -214,26 +214,17 @@ public class Voiture {
 					//Cas de la barriere
 					if(jCurrent.type.equals("Barriere"))
 					{
-						position++;
-						distanceRestante --;
-						distanceParcourue++;
+						//position++;
+						//distanceRestante --;
+						//distanceParcourue++;
+						System.out.println("(!) La voiture n°"+this.identifiant+" essaye de franchir une barrière (!) \n");		
 						this.vitesseCourante = 0;
-						//TODO notifier qu'une voiture essaye de franchir une barriere
-						//System.out.println("CEST UNE BARRIERE \n");		
+						
 					}
 					//Jonction sans feux
 					else if(!estFeu())
 					{
 						changementSegment(jCurrent);
-						if(sens == 1)
-						{
-							position++;
-						}
-						else
-						{
-							position--;
-						}
-						
 						distanceRestante --;
 						distanceParcourue++;
 					}
@@ -248,30 +239,23 @@ public class Voiture {
 							{
 								if(((FeuxTricolore) s).getCouleurActuelle() == Couleur.VERT)
 								{
-									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu vert\n");
+									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu vert");
 									changementSegment(jCurrent);
-									if(sens == 1)
-									{
-										position++;
-									}
-									else
-									{
-										position--;
-									}
 									distanceRestante --;
 									distanceParcourue++;
 								}
 								else if(((FeuxTricolore) s).getCouleurActuelle() == Couleur.ORANGE)
 								{
-									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu orange\n");
+									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu orange");
 									changementSegment(jCurrent);
 									distanceRestante --;
 									distanceParcourue++;
 								}
 								else //Le feu est rouge
 								{
-									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu rouge\n");
-									//distanceRestante = 0;
+									System.out.println("La voiture n°"+this.getIdentifiant()+" rencontre un feu rouge");
+									this.vitesseCourante = 0;
+									distanceRestante = 0;
 									
 								}
 								//On met à jour la vitesse

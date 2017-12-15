@@ -13,6 +13,7 @@ public class CapteurVitesse extends CapteurPresence implements ObservableCapteur
 		this.register(sonElementRegulation);
 		type = "Vitesse";
 		this.vmax = vmax;
+		sonMorceauRoute.getSesCapteurs().add(this);
 	}
 
 	@Override

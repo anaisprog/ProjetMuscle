@@ -20,6 +20,7 @@ public abstract class Capteur {
 		this.sonMorceauRoute = sonMorceauRoute;
 		this.sonSens = sonSens;
 		this.saPosition = saPosition;
+		sonElementRegulation.getSesCapteurs().add(this);
 	}
 
 
@@ -58,5 +59,7 @@ public abstract class Capteur {
 	public void setSaPosition(int saPosition) {
 		this.saPosition = saPosition;
 	}
+	
+	public abstract boolean detecteVoiture();
 
 }

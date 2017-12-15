@@ -24,11 +24,13 @@ public class SegmentRoute extends MorceauRoute {
 		ID++;
 	}
 	
-	public SegmentRoute(int id, int longueur)
+	public SegmentRoute(int id, int longueur, ReseauRoutier r)
 	{
 		this.id = id;
 		this.longueur = longueur;
 		this.type = "Segment";
+		r.getSesRoutes().add(this);
+		this.sonReseau = r;
 
 	}
 

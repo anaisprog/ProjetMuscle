@@ -8,10 +8,18 @@ public class ElementRegulation implements ObserverCapteurVitesse {
 	 * aux carrefours
 	 */
 	
-	ArrayList<Capteur> sesCapteurs = new ArrayList<>();
-	ArrayList<Semaphore> sesSemaphores = new ArrayList<>();
-	
-	
+	ArrayList<Capteur> sesCapteurs = new ArrayList<Capteur>();
+	ArrayList<Semaphore> sesSemaphores = new ArrayList<Semaphore>();
+
+	public ElementRegulation()
+	{
+
+	}
+	public ElementRegulation(ArrayList<Semaphore> sem)
+	{
+		sesSemaphores.add(sem.get(0));
+	}
+
 	public ArrayList<Capteur> getSesCapteurs() {
 		return sesCapteurs;
 	}
@@ -35,12 +43,15 @@ public class ElementRegulation implements ObserverCapteurVitesse {
 		{
 			System.out.println("Vitesse superieure a la vitesse reglementaire : "+vmax);
 			System.out.println("------------------------------");
-			for(int i =0; i<this.sesSemaphores.size(); i++)
+			
+			for(Semaphore s : this.sesSemaphores)
 			{
-				if((this.sesSemaphores.get(i).getType()=="FeuxTricolore" || this.sesSemaphores.get(i).getType()=="FeuxBicolore"))
+
+				if((s.getType()=="FeuxTricolore" || s.getType()=="FeuxBicolore"))
 				{
-					System.out.println("Le feu du segment numero " + this.sesSemaphores.get(i).getSegment().getId() + " passe au Rouge " );
-					((Feux)(this.sesSemaphores.get(i))).attribueCouleurRouge();
+					
+					System.out.println("La voiture n°"+v.getIdentifiant()+" roule trop vite :(. Le feu du segment n°" + s.getSegment().getId() + " passe au rouge " );
+					((Feux)s).attribueCouleurRouge();
 				}
 			}
 		}

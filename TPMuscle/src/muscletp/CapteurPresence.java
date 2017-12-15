@@ -1,9 +1,9 @@
 package muscletp;
 
 public class CapteurPresence extends Capteur {
-	boolean presence;
+
 	
-	public CapteurPresence( ElementRegulation sonElementRegulation, MorceauRoute sonMorceauRoute, int sonSens, int saPosition) 
+	public CapteurPresence(ElementRegulation sonElementRegulation, MorceauRoute sonMorceauRoute, int sonSens, int saPosition) 
 	{
 		super(sonElementRegulation, sonMorceauRoute, sonSens, saPosition);
 		this.type = "Presence";
@@ -11,6 +11,7 @@ public class CapteurPresence extends Capteur {
 	
 	//renvoie true si une voiture a ete detectee sur le morceauRoute
 	
+	@Override
 	public boolean detecteVoiture()
 	{
 		if((this.sonMorceauRoute.getVoiture(this.saPosition, this.sonSens)!=null))

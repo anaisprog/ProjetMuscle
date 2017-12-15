@@ -11,14 +11,19 @@ public class ReseauRoutier {
 	private ArrayList<Jonction> listeJonctions = new ArrayList<Jonction>(); 
 	private ArrayList<Capteur> sesCapteurs = new ArrayList<Capteur>();
 	private ArrayList<ElementRegulation> listeElementsRegulation = new ArrayList<ElementRegulation>();
+	private ArrayList<Semaphore> sesSemaphores = new ArrayList<Semaphore>();
 	private int nbVoitures = 0;
 	private ArrayList<Voiture> sesVoitures;
+	private int intervalle =1;
+	Scanner sc = new Scanner(System.in);
+	//private ConctructionReseau sonConstructeur;
 	
 	//Bloc d'initialisation
 	{
 		sesVoitures = new ArrayList<Voiture>();
 		sesRoutes = new ArrayList<MorceauRoute>();
 	}
+	
 	
 	public ArrayList<MorceauRoute> getSesRoutes() 
 
@@ -54,53 +59,53 @@ public class ReseauRoutier {
 	public void setSesVoitures(ArrayList<Voiture> sesVoitures) {
 		this.sesVoitures = sesVoitures;
 	}
+	
+	public ArrayList<Semaphore> getSesSemaphores() {
+		return sesSemaphores;
+	}
+	public void setSesSemaphores(ArrayList<Semaphore> sesSemaphores) {
+		this.sesSemaphores = sesSemaphores;
+	}
 	public void creationReseau() //Ne pas oublier d'ajouter les feux, radars ...
 	{
 		//Le detail de notre resau est en annexe. 
 		//Il sera constitue d'une barriere, deux passages pietons, deux carrefours en T et un a 4 voies
 		
 		//Creation des trois segments de routes
-				SegmentRoute s7 = new SegmentRoute(7, 2); 
-				SegmentRoute s6 = new SegmentRoute(6,8);
-				SegmentRoute s8 = new SegmentRoute(8,2);
-				this.sesRoutes.add(s7);
-				this.sesRoutes.add(s6);
-				this.sesRoutes.add(s8);
+				
+				SegmentRoute s7 = new SegmentRoute(7, 2, this); 
+				SegmentRoute s6 = new SegmentRoute(6,8, this);
+				SegmentRoute s8 = new SegmentRoute(8,2,this);
 				
 				//Creation de la barriere
-				Barriere barriere = new Barriere(s7);
-				//barriere.getSesSegments().add(s7);
-				this.sesRoutes.add(barriere);
+				Barriere barriere = new Barriere(this,s7);
+				barriere.getSesSegments().add(s7);
 				
 				//Creation de la jonction : un carrefour en T
-				Carrefour carrefour1 = new Carrefour(s7,s8,s6);
-				//carrefour1.getSesSegments().add(s7);
-				//carrefour1.getSesSegments().add(s6);
-				//carrefour1.getSesSegments().add(s8);
-				this.sesRoutes.add(carrefour1);
+				Carrefour carrefour1 = new Carrefour(this,s7,s8,s6);
+
+				SegmentRoute s5 = new SegmentRoute(5, 2, this); 
+				SegmentRoute s4 = new SegmentRoute(4,5, this);
+				Carrefour carrefour2 = new Carrefour(this,s6,s4,s5);
+				//this.sesRoutes.add(carrefour2);
 				
-				SegmentRoute s5 = new SegmentRoute(5, 2); 
-				SegmentRoute s4 = new SegmentRoute(4,5);
-				this.sesRoutes.add(s5);
-				this.sesRoutes.add(s4);
-				Carrefour carrefour2 = new Carrefour(s6,s4,s5);
-				this.sesRoutes.add(carrefour2);
+				SegmentRoute s1 = new SegmentRoute(1, 4, this); 
+				//this.sesRoutes.add(s1);
+				JonctionSimple js1 = new JonctionSimple(this,s1, s5,false);
+				//this.sesRoutes.add(js1);
 				
-				SegmentRoute s1 = new SegmentRoute(1, 4); 
-				this.sesRoutes.add(s1);
-				JonctionSimple js1 = new JonctionSimple(s1, s5,false);
-				this.sesRoutes.add(js1);
+				SegmentRoute s3 = new SegmentRoute(3, 5, this); 
+
+				ElementRegulation er2 = new ElementRegulation();
+				
+				//On ajoute sur cette jonction un capteur de vitesse
+				JonctionSimple js2 = new JonctionSimple(er2,this,s3, s4,true);
+				new CapteurVitesse(er2, s3, 1, 3,2);
 
 				
-				SegmentRoute s3 = new SegmentRoute(3, 7); 
-				this.sesRoutes.add(s3);
-				JonctionSimple js2 = new JonctionSimple(s3, s4,true);
-				this.sesRoutes.add(js2);
 				
-				SegmentRoute s2 = new SegmentRoute(2, 3); 
-				this.sesRoutes.add(s2);
-				Carrefour carrefour4 = new Carrefour (s8,s3,s1,s2);
-				this.sesRoutes.add(carrefour4);
+				SegmentRoute s2 = new SegmentRoute(2, 3, this); 
+				Carrefour carrefour4 = new Carrefour (this,s8,s3,s1,s2);
 
 				s1.getSesJonctions().add(js1);
 				s1.getSesJonctions().add(carrefour4);
@@ -125,15 +130,7 @@ public class ReseauRoutier {
 				
 				s8.getSesJonctions().add(carrefour4);
 				s8.getSesJonctions().add(carrefour1);
-				
-				//On ajoute les jonctions aux réseaux routiers
-				this.listeJonctions.add(js1);
-				this.listeJonctions.add(js2);
-				this.listeJonctions.add(barriere);
-				this.listeJonctions.add(carrefour1);
-				this.listeJonctions.add(carrefour2);
-				this.listeJonctions.add(carrefour4);
-				
+
 				//Placement des capteurs
 				this.placementCapteur();
 		
@@ -206,11 +203,11 @@ public class ReseauRoutier {
 	
 	public void placementCapteur()
 	{
+		
 		ElementRegulation er1 = new ElementRegulation();
 		CapteurPresence cp1 = new CapteurPresence(er1,getSegmentWithId(1), -1, 2);
-		sesCapteurs.add(cp1);
 		er1.getSesCapteurs().add(cp1);
-		
+		sesCapteurs.add(cp1);
 		getSegmentWithId(1).getSesCapteurs().add(cp1);
 		
 		CapteurPresence cp2 = new CapteurPresence(er1,getSegmentWithId(4), -1, 2);
@@ -218,17 +215,12 @@ public class ReseauRoutier {
 		er1.getSesCapteurs().add(cp2);
 		getSegmentWithId(1).getSesCapteurs().add(cp2);
 		
-		ElementRegulation er2 = new ElementRegulation();
-		CapteurVitesse cv1 = new CapteurVitesse(er2, getSegmentWithId(3), 1, 3,2);
-		sesCapteurs.add(cv1);
-		er2.getSesCapteurs().add(cv1);
-		getSegmentWithId(3).getSesCapteurs().add(cv1);
+		//ElementRegulation er2 = new ElementRegulation( ((SegmentRoute) getSegmentWithId(3)).getSesSemaphores());
 	
 	}
 	
 	public MorceauRoute getSegmentWithId(int id)
 	{
-
 			for(MorceauRoute s : sesRoutes)
 			{
 				if(s.type.equals("Segment"))
@@ -247,40 +239,40 @@ public class ReseauRoutier {
 
 	/*Cette methode permet de mettre a jour la couleur des feux a chaque intervalle*/
 	
-	public void majCouleurFeux(){
-		for(int i =0; i<this.sesRoutes.size(); i++){
-			for(int j=0; j<(this.sesRoutes.get(i)).sesSemaphores.size(); j++){
-				//Si le semaphore est un Feu
-				if((this.sesRoutes.get(i)).sesSemaphores.get(j).getType()=="FeuxTricolore" || (this.listeElementsRegulation.get(i)).sesSemaphores.get(j).getType()=="FeuxBicolore"){
+	public void majCouleurFeux()
+	{
+		for(Semaphore s : sesSemaphores)
+		{
+				if((s.getType()=="FeuxTricolore" || (s.getType()=="FeuxBicolore")))
+				{
 					//Si la couleur actuelle du feu est ROUGE, on agit differement si le feu est Tricolore ou Bicolore
-					if(((Feux)this.sesRoutes.get(i).sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ROUGE)
+					if(((Feux) s).getCouleurActuelle()==Couleur.ROUGE)
 					{
-						if(((this.sesRoutes.get(i)).sesSemaphores.get(j).getType()=="FeuxTricolore"))
+						if((s.getType()=="FeuxTricolore"))
 						{
-							((FeuxTricolore)this.sesRoutes.get(i).sesSemaphores.get(j)).attribueCouleurVerte();
-							System.out.println("Le feu du segment n°"+((SegmentRoute) this.sesRoutes.get(i)).getId()+" passe au vert");
+							((FeuxTricolore)s).attribueCouleurVerte();
+							System.out.println("Le feu du segment n°"+s.getSegment().getId()+" passe au vert");
 						}
 						else{
 							//C'est un feuBicolore on passe du ROUGE a l'ORANGE
-							((FeuxBicolore)this.sesRoutes.get(i).sesSemaphores.get(j)).attribueCouleurOrange();
-							System.out.println("Le feu bicolore du segment n°"+((SegmentRoute) this.sesRoutes.get(i)).getId()+" passe à l'orange");
+							((FeuxBicolore)s).attribueCouleurOrange();
+							System.out.println("Le feu bicolore du segment n°"+(s.getSegment().getId()+" passe à l'orange"));
 						}
 					}
 					//Si la couleur actuelle du feu est VERT 
-					else if(((Feux)this.sesRoutes.get(i).sesSemaphores.get(j)).getCouleurActuelle()==Couleur.VERT)
+					else if(((Feux)s).getCouleurActuelle()==Couleur.VERT)
 					{
-						((FeuxTricolore)this.sesRoutes.get(i).sesSemaphores.get(j)).attribueCouleurOrange();
-						System.out.println("Le feu du segment n°"+((SegmentRoute) this.sesRoutes.get(i)).getId()+" passe à l'orange");
+						((FeuxTricolore)s ).attribueCouleurOrange();
+						System.out.println("Le feu du segment n°"+(s.getSegment().getId()+" passe à l'orange"));
 					}
-					else if(((Feux)this.sesRoutes.get(i).sesSemaphores.get(j)).getCouleurActuelle()==Couleur.ORANGE)
+					else if(((Feux)s).getCouleurActuelle()==Couleur.ORANGE)
 					{
-						((FeuxTricolore)this.sesRoutes.get(i).sesSemaphores.get(j)).attribueCouleurRouge();
-						System.out.println("Le feu du segment n°"+((SegmentRoute) this.sesRoutes.get(i)).getId()+" passe au rouge");
+						((FeuxTricolore) s).attribueCouleurRouge();
+						System.out.println("Le feu du segment n°"+s.getSegment().getId()+" passe au rouge");
 					}	
 				}
 			}
 		}
-	}
 	
 	public void etatVoitures()
 	{
@@ -293,8 +285,6 @@ public class ReseauRoutier {
 	
 	public void gestionIntervalles()
 	{
-		Scanner sc = new Scanner(System.in);;
-		int intervalle =1;
 		
 		System.out.println("Pour démarrer l'intervalle n°"+intervalle+" appuyez sur go");
 		String reponse = sc.nextLine();
@@ -306,7 +296,7 @@ public class ReseauRoutier {
 		
 		System.out.println("Déroulement de l'intervalle n°"+intervalle);
 		intervalle();
-		intervalle++;
+
 		
 	}
 	
@@ -315,14 +305,15 @@ public class ReseauRoutier {
 		//Tout d'abord on active les detecteur de presene
 		
 		//Ensuite on incrémente de la vitesse
-		System.out.println("Etat du réseau avant l'intervalle\n");
+		System.out.println("• Etat du réseau avant l'intervalle\n");
 		etatVoitures();
 		deplacementVoiture();
-		System.out.println("Etat du réseau après l'intervalle\n");
+		System.out.println("• Etat du réseau après l'intervalle\n");
 		etatVoitures();
-		//Premierement deplacer toutes les voitures du reseau de leur vitesse
-		//Activer les sémaphore selon les infos recoltees
-		//Détecter les collisions
+		System.out.println("• Mise à jour des feux \n");
+		majCouleurFeux();
+		intervalle++;
+		gestionIntervalles();
 		
 	}
 	
@@ -341,7 +332,7 @@ public class ReseauRoutier {
 	
 	public void deplacementVoiture()
 	{
-		System.out.println("Déplacement des voitures\n");
+		System.out.println("• Déplacement des voitures\n");
 		for(Voiture v : sesVoitures)
 		{
 			v.deplacerVoiture(sesCapteurs);
@@ -356,14 +347,12 @@ public class ReseauRoutier {
 	}
 	
 
-	
-	
 	public static void main(String[] args)
 	{
 
 		ReseauRoutier r = new ReseauRoutier();
 		
-		System.out.println("Création du réseau routier...\n");
+		System.out.println("******Création du réseau routier******\n");
 		
 		//Creation du réseau routier
 		r.creationReseau();
